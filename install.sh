@@ -84,8 +84,8 @@ EOF
 ####
 #### make authrization step and logger
 
-mkdir -p ~/.nanomiku/plugin/daemon_auth_log
-cat << EOF > ~/.nanomiku/plugin/daemon_auth_log/daemon_auth_log.rb
+mkdir -p ~/.nanomiku/plugin/daemon_log
+cat << EOF > ~/.nanomiku/plugin/daemon_log/daemon_log.rb
 
 #-*- coding: utf-8 -*-
 
@@ -95,21 +95,6 @@ require 'logger'
 Plugin.create(:daemon_sample) do
  DAEMON_LOGDIR = File.join(CHIConfig::LOGDIR, 'daemon_sample')
  DAEMON_LOGFILE = File.join(DAEMON_LOGDIR, 'daemon_sample.log')
-
- def request_token()
-  twitter = MikuTwitter.new
-  twitter.consumer_key =  ""
-  twitter.consumer_secret =  ""
-  req = twitter.request_oauth_token
-  puts req.authorize_url
-  print "code: "
-  code = STDIN.gets.chomp
-  access_token = req.get_access_token(oauth_token: req.token, oauth_verifier: code)
-  Service.add_service(access_token.token, access_token.secret)
- end
-
-
- request_token if Service.services.empty?
 
  FileUtils.mkpath(DAEMON_LOGDIR) unless File.exist? (DAEMON_LOGDIR)
  log = Logger.new(DAEMON_LOGFILE)
@@ -124,7 +109,19 @@ end
 
 EOF
 
-emacs -nw  ~/.nanomiku/plugin/daemon_auth_log/daemon_auth_log.rb
+
+mkdir -p ~/.nanomiku/plugin/humming_ui
+cat << EOF > ~/.nanomiku/plugin/humming_ui/humming_ui.rb
+Plugin.create(:update) do
+  onupdate do |s,m|
+    notice m
+  end
+end
+
+EOF
+
+
+
 rm -rf ./tmp_mikutter
 
 
