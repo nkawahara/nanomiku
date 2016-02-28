@@ -137,5 +137,4 @@ rm -rf ./tmp_mikutter
 ####   git clone plugins
 
 cd ~/.nanomiku/plugin
-git clone https://github.com/syusui-s/mikutterm
 git clone https://github.com/nkawahara/wings
