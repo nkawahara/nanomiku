@@ -26,35 +26,8 @@ EOF
 ####
 ####
 
-mkdir -p ./canopy/core
-cp $ORIG_MIKUTTER_PATH/Gemfile ./canopy/
-cp $ORIG_MIKUTTER_PATH/mikutter.rb ./canopy/
-cp $ORIG_MIKUTTER_PATH/core/environment.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/config.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/service.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/user.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/retriever.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/skin.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/userconfig.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/configloader.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/serialthread.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/plugin.rb ./canopy/core/
-#cp $ORIG_MIKUTTER_PATH/core/event.rb ./canopy/core/
-#cp $ORIG_MIKUTTER_PATH/core/event_listener.rb ./canopy/core/
-#cp $ORIG_MIKUTTER_PATH/core/event_filter.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/message.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/entity.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/userlist.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/service_keeper.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/miquire_plugin.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/utils.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/miquire.rb  ./canopy/core/
-
-cp $ORIG_MIKUTTER_PATH/core/boot -r ./canopy/core
-cp $ORIG_MIKUTTER_PATH/core/lib -r ./canopy/core
-cp $ORIG_MIKUTTER_PATH/core/miku -r ./canopy/core
-cp $ORIG_MIKUTTER_PATH/core/plugin -r ./canopy/core
-rm -r ./canopy/core/plugin/gtk
+mkdir canopy
+cp -r $ORIG_MIKUTTER_PATH/* ./canopy/
 
 ####
 #### touch nanomiku
@@ -65,7 +38,7 @@ rm -r ./canopy/core/plugin/gtk
 
 cat <<EOF > nanomiku.sh
 #! /bin/bash
-ruby canopy/mikutter.rb --confroot=~/.nanomiku --debug
+ruby canopy/mikutter.rb --confroot=~/.nanomiku --debug --plugin=streaming,daemon_log,humming_ui,wings
 EOF
 
 chmod +x nanomiku.sh
