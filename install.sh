@@ -39,9 +39,9 @@ cp $ORIG_MIKUTTER_PATH/core/userconfig.rb ./canopy/core/
 cp $ORIG_MIKUTTER_PATH/core/configloader.rb ./canopy/core/
 cp $ORIG_MIKUTTER_PATH/core/serialthread.rb ./canopy/core/
 cp $ORIG_MIKUTTER_PATH/core/plugin.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/event.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/event_listener.rb ./canopy/core/
-cp $ORIG_MIKUTTER_PATH/core/event_filter.rb ./canopy/core/
+#cp $ORIG_MIKUTTER_PATH/core/event.rb ./canopy/core/
+#cp $ORIG_MIKUTTER_PATH/core/event_listener.rb ./canopy/core/
+#cp $ORIG_MIKUTTER_PATH/core/event_filter.rb ./canopy/core/
 cp $ORIG_MIKUTTER_PATH/core/message.rb ./canopy/core/
 cp $ORIG_MIKUTTER_PATH/core/entity.rb ./canopy/core/
 cp $ORIG_MIKUTTER_PATH/core/userlist.rb ./canopy/core/
@@ -61,7 +61,7 @@ rm -r ./canopy/core/plugin/gtk
 ####
 ####
 
-sed -i -e "s/.mikutter/.nanomiku/g" ./canopy/Gemfile
+#sed -i -e "s/.mikutter/.nanomiku/g" ./canopy/Gemfile
 
 cat <<EOF > nanomiku.sh
 #! /bin/bash
@@ -108,6 +108,12 @@ Plugin.create(:daemon_sample) do
 end
 
 EOF
+
+#
+# atho 
+#
+ruby canopy/mikutter.rb --confroot=~/.nanomiku --debug account
+
 
 
 mkdir -p ~/.nanomiku/plugin/humming_ui
